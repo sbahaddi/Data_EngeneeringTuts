@@ -1,5 +1,6 @@
 # Data_EngeneeringTuts
-Practice
+
+### Practice
 
 An online retailer has a website where you can purchase widgets in a variety of colors. The website is backed by a relational database. Every transaction is stored in the database. How many blue widgets did the retailer sell in the last quarter?
 To answer this question, you could run a SQL query on the database. This doesn't rise
@@ -33,3 +34,24 @@ To build data pipelines, data engineers need to choose the right tools for the j
     • Variety: Data engineers need tools that handle a variety of data formats in different locations (databases, APIs, files).
     • Velocity: The velocity of data is always increasing. Tracking the activity of millions of users on a social network or the purchases of users all over the world requires data engineers to operate often in near real time.
 
+### Data processing engines
+Data processing engines allow data engineers to transform data whether it is in batches or streams. These engines allow the parallel execution of transformation tasks. The most popular engine is Apache Spark. Apache Spark allows data engineers to write transformations in Python, Java, and Scala.
+
+Apache Spark works with Python DataFrames, making it an ideal tool for Python programmers. Spark also has Resilient Distributed Datasets (RDDs). RDDs are an immutable and distributed collection of objects. You create them mainly by loading in an external data source. RDDs allow fast and distributed processing. The tasks in an RDD are run on different nodes within the cluster. Unlike DataFrames, they do not try to guess the schema in your data.
+
+Other popular process engines include Apache Storm, which utilizes spouts to read
+data and bolts to perform transformations. By connecting them, you build a processing pipeline. Apache Flink and Samza are more modern stream and batch processing frameworks that allow you to process unbounded streams. An unbounded stream is data that comes in with no known end – a temperature sensor, for example, is an unbounded stream. It is constantly reporting temperatures. Flink and Samza are excellent choices if you are using Apache Kafka to stream data from a system
+
+## Data pipelines
+Combining a transactional database, a programming language, a processing engine,
+and a data warehouse results in a pipeline. For example, if you select all the records of widget sales from the database, run it through Spark to reduce the data to widgets and counts, then dump the result to the data warehouse, you have a pipeline. But this pipeline is not very useful if you have to execute manually every time you want it to run. Data pipelines need a scheduler to allow them to run at specified intervals. The simplest way to accomplish this is by using crontab. Schedule a cron job for your Python file and sit back and watch it run every X number of hours.
+
+Managing all the pipelines in crontab becomes difficult fast. How do you keep track of pipelines' successes and failures? How do you know what ran and what didn't? How do you handle backpressure – if one task runs faster than the next, how do you hold data back, so it doesn't overwhelm the task? As your pipelines become more advanced, you will quickly outgrow crontab and will need a better framework.
+
+### Apache Airflow
+The most popular framework for building data engineering pipelines in Python is Apache Airflow. Airflow is a workflow management platform built by Airbnb. Airflow is made
+up of a web server, a scheduler, a metastore, a queueing system, and executors. You can run Airflow as a single instance, or you can break it up into a cluster with many executor nodes – this is most likely how you would run it in production. Airflow uses Directed Acyclic Graphs (DAGs).
+
+A DAG is Python code that specifies tasks. A graph is a series of nodes connected by a relationship or dependency. In Airflow, they are directed because they flow in a direction with each task coming after its dependency. Using the preceding example pipeline, the first node would be to execute a SQL statement grabbing all the widget sales. This node would connect downstream to another node, which would aggregate the widgets and counts. Lastly, this node would connect to the final node, which loads the data into the warehouse. The pipeline DAG would look as in the following diagram:
+
+<img src="img/1.4.png">
