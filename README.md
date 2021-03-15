@@ -55,3 +55,5 @@ up of a web server, a scheduler, a metastore, a queueing system, and executors. 
 A DAG is Python code that specifies tasks. A graph is a series of nodes connected by a relationship or dependency. In Airflow, they are directed because they flow in a direction with each task coming after its dependency. Using the preceding example pipeline, the first node would be to execute a SQL statement grabbing all the widget sales. This node would connect downstream to another node, which would aggregate the widgets and counts. Lastly, this node would connect to the final node, which loads the data into the warehouse. The pipeline DAG would look as in the following diagram:
 
 <img src="img/1.4.png">
+
+### Apache NiFi
