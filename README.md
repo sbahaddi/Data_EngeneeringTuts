@@ -13,6 +13,7 @@ Rather than finding the number of blue widgets sold, companies would prefer to f
     • How do we find out the combinations of widgets that are sold together?
 
 Let's now answer the questions in the preceding list one by one:
+
     • Extract the data from each database.
     • Add a field to tag the location for each transaction in the data
     • Transform the date from local time to ISO 8601.
