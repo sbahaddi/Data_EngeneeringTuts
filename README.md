@@ -57,3 +57,10 @@ A DAG is Python code that specifies tasks. A graph is a series of nodes connecte
 <img src="img/1.4.png">
 
 ### Apache NiFi
+Apache NiFi is another framework for building data engineering pipelines, and it too utilizes DAGs. Apache NiFi was built by the National Security Agency and is used
+at several federal agencies. Apache NiFi is easier to set up and is useful for new data engineers. The GUI is excellent and while you can use Jython, Clojure, Scala, or Groovy to write processors, you can accomplish a lot with a simple configuration of existing processors. The following screenshot shows the NiFi GUI and a sample DAG:
+
+<img src="1.6.png">
+
+
+
